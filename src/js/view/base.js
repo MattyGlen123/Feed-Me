@@ -3,4 +3,3 @@ export const DOMelements = {
   searchForm: document.querySelector('.search'),
   searchInput: document.querySelector('.searchInput')
 }
-

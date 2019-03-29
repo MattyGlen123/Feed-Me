@@ -1,4 +1,5 @@
 import * as searchView from './view/searchView';
+import { DOMelements } from './view/base';
 import Search from './modal/search';
 
 
@@ -6,11 +7,12 @@ import Search from './modal/search';
 const state = {
   search: {},
   recipeArr: [],
-  defaultIngredients:['beef', 'chicken']
+  defaultIngredients:['beef', 'chicken', 'fish', 'pasta']
 };
 
-// Preset querys
-state.defaultIngredients = ['beef', 'chicken', 'fish', 'pasta'];
+
+// render loader
+searchView.renderLoader(DOMelements.results);
 
 
 const controlSearch = async (item, userSearch = false) => {
@@ -30,7 +32,7 @@ const controlSearch = async (item, userSearch = false) => {
   // if state recipeArr has 4 item
   if(state.recipeArr.length === 4) {
     // prepare UI
-    // clearLoader();
+    searchView.clearLoader();
     
     // render results to UI
     searchView.renderRecipe(state.recipeArr);
@@ -40,7 +42,21 @@ const controlSearch = async (item, userSearch = false) => {
 
 // Get data for default ingredients ex beef, chicken, pasta, lamb
 state.defaultIngredients.forEach(item => {
-  
+  // Query api
   controlSearch(item);
 });
 
+
+// Search data
+DOMelements.searchForm.addEventListener('submit', e => {
+  e.preventDefault();
+  // Get User input
+  let query = searchView.getInput();
+  
+  // Prepare UI for results
+  searchView.clearResults();
+  searchView.renderLoader(DOMelements.results);
+  
+  // Query api
+  controlSearch(query, true);
+});
