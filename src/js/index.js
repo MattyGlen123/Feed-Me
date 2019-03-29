@@ -1,28 +1,62 @@
 import * as searchView from './view/searchView';
+import { DOMelements } from './view/base';
 import Search from './modal/search';
 
 
 // Global State of App
 const state = {
-  search: {}
+  search: {},
+  recipeArr: [],
+  defaultIngredients:['beef', 'chicken', 'fish', 'pasta']
 };
 
-// Preset querys
-state.defaultIngredients = ['beef', 'chicken'];
+
+// render loader
+searchView.renderLoader(DOMelements.results);
 
 
-const controlSearch = async (item) => {
-  // 1. add new search object to state
+const controlSearch = async (item, userSearch = false) => {
+  // Add new search object to state
   state.search[item] = new Search(item);
-  // 2. Prepare UI for results
   
-  // 3. store results in state
+  // store results in state
   await state.search[item].getResults();
-  // 4. Render Results
-  searchView.renderRecipe(state.search[item].results.recipes[0]);
+
+  // Create array of 4 recipes
+  if(userSearch) {
+    state.recipeArr = state.search[item].results.recipes.splice(0, 4);
+  } else {
+    state.recipeArr.push(state.search[item].results.recipes[0]);
+  }
+
+  // if state recipeArr has 4 item
+  if(state.recipeArr.length === 4) {
+    // prepare UI
+    searchView.clearLoader();
+    
+    // render results to UI
+    searchView.renderRecipe(state.recipeArr);
+  }
 }
 
 
+// Get data for default ingredients ex beef, chicken, pasta, lamb
 state.defaultIngredients.forEach(item => {
+  // Query api
   controlSearch(item);
+});
+
+
+// Search data
+DOMelements.searchForm.addEventListener('submit', e => {
+  e.preventDefault();
+  // Get User input
+  let query = searchView.getInput();
+  
+  // Prepare UI for results
+  searchView.clearResults();
+  searchView.renderLoader(DOMelements.results);
+  
+  // Query api
+  controlSearch(query, true);
 });
