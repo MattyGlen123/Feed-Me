@@ -4,8 +4,7 @@ export default class Search {
   }
   
   async getResults(query) {
-    const key = '380e54aef1f0e9204bb643d77c675390';
-    const proxy = '';// Use proxy for local dev only
+    // const key = '380e54aef1f0e9204bb643d77c675390';
     const result = await fetch(`https://www.food2fork.com/api/search?key=${key}&q=${this.query}`);
     this.results = await result.json();
     console.log(this.results); 
