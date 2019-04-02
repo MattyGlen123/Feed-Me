@@ -7,13 +7,16 @@ import Search from './modal/search';
 const state = {
   search: {},
   recipeArr: [],
-  defaultIngredients:['beef', 'chicken', 'fish', 'pasta']
+  currentIngredients:['beef', 'chicken', 'fish', 'pasta']
 };
 
 
 // render loader
 searchView.renderLoader(DOMelements.results);
 
+
+// replace current ingredients with User input value
+const updatecurrentIngredients = (item) => state.currentIngredients = item;
 
 const controlSearch = async (item, userSearch = false) => {
   // Add new search object to state
@@ -22,11 +25,16 @@ const controlSearch = async (item, userSearch = false) => {
   // store results in state
   await state.search[item].getResults();
 
-  // Create array of 4 recipes
+  // if the user enters a value into the search input
   if(userSearch) {
-    state.recipeArr = state.search[item].results.recipes.splice(0, 4);
+    // Replace default ingredients with the user input 
+    updatecurrentIngredients(item);
+
+    // Use the new value to add 4 new recipes to state recipe array
+    state.recipeArr = state.search[item].results.splice(0, 4);
   } else {
-    state.recipeArr.push(state.search[item].results.recipes[0]);
+    // get 4 new recipes from state
+    state.recipeArr.push(...state.search[item].results.splice(0, 1));
   }
 
   // if state recipeArr has 4 item
@@ -41,7 +49,7 @@ const controlSearch = async (item, userSearch = false) => {
 
 
 // Get data for default ingredients ex beef, chicken, pasta, lamb
-state.defaultIngredients.forEach(item => {
+state.currentIngredients.forEach(item => {
   // Query api
   controlSearch(item);
 });
@@ -59,4 +67,41 @@ DOMelements.searchForm.addEventListener('submit', e => {
   
   // Query api
   controlSearch(query, true);
+});
+
+// used to reset UI recipes
+const clearRecipeArr = () => state.recipeArr = [];
+
+
+const userRecipeUpdate = () => {
+  state.recipeArr = state.search[state.currentIngredients].results.splice(0, 4);
+};
+
+
+const defaultRecipeUpdate = () => {
+  // remove old recipes
+  clearRecipeArr();
+  
+  // Add next recipe from state to recipe array
+  state.currentIngredients.forEach(item => {
+    state.recipeArr.push(...state.search[item].results.splice(0, 1));
+  });
+} 
+
+
+DOMelements.refreshBtn.addEventListener('click', () => {
+  // update recipeArr with 4 new recipes from state
+  if(typeof state.currentIngredients === 'string') {
+    userRecipeUpdate();
+  } else {
+    defaultRecipeUpdate();
+  }
+
+  // prepare UI
+  searchView.clearResults();
+  searchView.renderLoader(DOMelements.results);
+  
+  // render new recipes
+  searchView.clearLoader();
+  searchView.renderRecipe(state.recipeArr);
 });

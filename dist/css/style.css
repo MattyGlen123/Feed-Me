@@ -64,3 +64,19 @@ form {
     transform: rotate(360deg);  
   }
 }
+
+
+.refresh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: bottom;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  color: black;
+  font-size: 2rem;
+} 
