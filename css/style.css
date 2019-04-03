@@ -17,13 +17,19 @@ main {
 }
 
 .results {
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
 .recipe {
+  text-decoration: none;
+  color: black;
   width: 45%;
+}
+
+.recipe__card {
   background-color: white;
   border-radius: 10px;
   display: flex;
