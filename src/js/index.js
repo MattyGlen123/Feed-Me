@@ -1,13 +1,15 @@
 import * as searchView from './view/searchView';
 import { DOMelements } from './view/base';
 import Search from './modal/search';
+import Recipe from './modal/recipe';
+
 
 
 // Global State of App
 const state = {
   search: {},
   recipeArr: [],
-  currentIngredients:['beef', 'chicken', 'fish', 'pasta']
+  currentIngredients:['beef', 'chicken']
 };
 
 
@@ -38,7 +40,7 @@ const controlSearch = async (item, userSearch = false) => {
   }
 
   // if state recipeArr has 4 item
-  if(state.recipeArr.length === 4) {
+  if(state.recipeArr.length === 4 || state.recipeArr.length === 2) {
     // prepare UI
     searchView.clearLoader();
     
@@ -105,3 +107,31 @@ DOMelements.refreshBtn.addEventListener('click', () => {
   searchView.clearLoader();
   searchView.renderRecipe(state.recipeArr);
 });
+
+
+/**
+ * Recipe Controller
+ */
+
+//  const r = new Recipe(35107);
+//  r.getRecipe();
+//  console.log(r);
+
+const controlRecipe = async () => {
+  // get the id from the url
+  const id = window.location.hash.replace('#', '');
+
+  if(id) {
+    // prepare UI from changes
+
+    // create new recipe object
+    state.recipe = new Recipe(id);
+    // get recipe data
+    await state.recipe.getRecipe();
+    // render recipe
+    console.log(state.recipe);
+  }
+};
+
+
+window.addEventListener('hashchange', controlRecipe);
