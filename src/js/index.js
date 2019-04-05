@@ -1,4 +1,5 @@
 import * as searchView from './view/searchView';
+import * as recipeView from './view/recipeView';
 import { DOMelements } from './view/base';
 import Search from './modal/search';
 import Recipe from './modal/recipe';
@@ -113,11 +114,8 @@ DOMelements.refreshBtn.addEventListener('click', () => {
  * Recipe Controller
  */
 
-//  const r = new Recipe(35107);
-//  r.getRecipe();
-//  console.log(r);
-
 const controlRecipe = async () => {
+  console.log('fired');
   // get the id from the url
   const id = window.location.hash.replace('#', '');
 
@@ -126,12 +124,15 @@ const controlRecipe = async () => {
 
     // create new recipe object
     state.recipe = new Recipe(id);
+
     // get recipe data
     await state.recipe.getRecipe();
+
     // render recipe
     console.log(state.recipe);
+    console.log(recipeView);
+    recipeView.renderDetails(state.recipe);
   }
 };
 
-
-window.addEventListener('hashchange', controlRecipe);
+DOMelements.results.addEventListener('onhashchange', controlRecipe);
