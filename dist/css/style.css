@@ -57,6 +57,10 @@ form {
 }
 
 .loader {
+  align-self: center;
+}
+
+.loader__icon {
   font-size: 2rem;
   transform-origin: 50% 50%;
   animation: rotate 1.5s infinite linear; 

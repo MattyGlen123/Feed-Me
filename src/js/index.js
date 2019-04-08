@@ -10,7 +10,7 @@ import Recipe from './modal/recipe';
 const state = {
   search: {},
   recipeArr: [],
-  currentIngredients:['beef', 'chicken']
+  currentIngredients:['beef', 'chicken', 'salad', 'pasta']
 };
 
 
@@ -41,7 +41,7 @@ const controlSearch = async (item, userSearch = false) => {
   }
 
   // if state recipeArr has 4 item
-  if(state.recipeArr.length === 4 || state.recipeArr.length === 2) {
+  if(state.recipeArr.length === 4) {
     // prepare UI
     searchView.clearLoader();
     
@@ -115,12 +115,12 @@ DOMelements.refreshBtn.addEventListener('click', () => {
  */
 
 const controlRecipe = async () => {
-  console.log('fired');
   // get the id from the url
   const id = window.location.hash.replace('#', '');
 
   if(id) {
     // prepare UI from changes
+    recipeView.clearDetails();
 
     // create new recipe object
     state.recipe = new Recipe(id);
@@ -129,10 +129,8 @@ const controlRecipe = async () => {
     await state.recipe.getRecipe();
 
     // render recipe
-    console.log(state.recipe);
-    console.log(recipeView);
     recipeView.renderDetails(state.recipe);
   }
 };
 
-DOMelements.results.addEventListener('onhashchange', controlRecipe);
+window.addEventListener('hashchange', controlRecipe);

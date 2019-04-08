@@ -14,3 +14,5 @@ export const renderDetails = (recipe) => {
 
     DOMelements.recipeDetails.insertAdjacentHTML('afterbegin', markup);
 }
+
+export const clearDetails = () => DOMelements.recipeDetails.innerHTML = "";
