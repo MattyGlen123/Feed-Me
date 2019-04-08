@@ -7,9 +7,9 @@ export const clearResults = () => DOMelements.results.innerHTML = '';
 
 export const renderLoader = parentElement => {
   const loader = `
-    <span class="loader">
-      <i class="fa fa-spinner"></i>
-    </span>
+    <div class="loader">
+      <i class="fa fa-spinner loader__icon"></i>
+    </div>
 `;
   parentElement.insertAdjacentHTML('afterbegin', loader);
 }
