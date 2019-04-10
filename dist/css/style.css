@@ -1,4 +1,5 @@
 body {
+  font-family: 'Muli', sans-serif;
   background-color: grey;
   display: flex;
   align-items: center;
@@ -7,17 +8,23 @@ body {
 
 main {
   position: relative;
+  max-width: 330px;
+  width: 100vw;
   height: 90vh;
-  background-color: #f4e242;
-  border-radius: 10px;
+  background-image: linear-gradient(to right top, #dd6031, #ea802b, #f2a029, #f6c130, #f4e242);;
+  border-radius: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  overflow: hidden;
+}
+
+.title {
+  color: ghostwhite;
+  font-family: 'Rammetto One', cursive;
 }
 
 .results {
-  height: 100%;
-  width: 330px;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -26,28 +33,33 @@ main {
 .recipe {
   text-decoration: none;
   color: black;
-  width: 45%;
 }
 
 .recipe__card {
-  background-color: white;
+  width: 45%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  overflow: hidden;
   margin: 1rem 0;
+  box-shadow: 0px 7px 8px -6px rgba(0,0,0,0.75);
+  border: 1px solid lightsalmon;
+
 }
   
- .recipe__img {
-    height: 100px;
-    width: 100px;
-    border-radius: 100%;
+  .recipe__img {
+    height: 15vh;
+    width: 100%;
+    object-fit: cover;
   }
   
 .recipe__title {
-    text-align: center;
-  }
+  color: ghostwhite;
+  margin: 0;
+  padding: 5%;
+  font-weight: bold;
+}
 
 form {
   transform-origin: bottom;
@@ -63,7 +75,8 @@ form {
 .loader__icon {
   font-size: 2rem;
   transform-origin: 50% 50%;
-  animation: rotate 1.5s infinite linear; 
+  animation: rotate 1.5s infinite linear;
+  color: orangered;
 }
 
 @keyframes rotate {
@@ -75,21 +88,42 @@ form {
   }
 }
 
-
-.refresh {
+.refresh,
+.list {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform-origin: bottom;
+  width: 40px;
+  padding: 7%;
+  color: orangered;
+  font-size: 1rem;
+  flex: 1;
+}
+
+.nav {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  border-radius: 20px 20px 0 0;
+}
+
+.search {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 42%;
+  transform-origin: center center;
+  background-color: red;
+  height: 100px;
   width: 50px;
-  height: 50px;
-  border: 1px solid black;
-  color: black;
-  font-size: 2rem;
-} 
+  color: white;
+  border-radius: 30px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
 
 .recipe-details {
   height: 90vh;
