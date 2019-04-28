@@ -22,6 +22,7 @@ main {
 .title {
   color: ghostwhite;
   font-family: 'Rammetto One', cursive;
+  margin: 0;
 }
 
 .results {
@@ -33,10 +34,11 @@ main {
 .recipe {
   text-decoration: none;
   color: black;
+  width: 45%;
 }
 
 .recipe__card {
-  width: 45%;
+  height: 90%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -45,7 +47,6 @@ main {
   margin: 1rem 0;
   box-shadow: 0px 7px 8px -6px rgba(0,0,0,0.75);
   border: 1px solid lightsalmon;
-
 }
   
   .recipe__img {
@@ -94,7 +95,7 @@ form {
   align-items: center;
   justify-content: center;
   width: 40px;
-  padding: 7%;
+  padding: 5%;
   color: orangered;
   font-size: 1rem;
   flex: 1;

@@ -14,10 +14,6 @@ const state = {
 };
 
 
-// render loader
-searchView.renderLoader(DOMelements.results);
-
-
 // replace current ingredients with User input value
 const updatecurrentIngredients = (item) => state.currentIngredients = item;
 
@@ -44,7 +40,8 @@ const controlSearch = async (item, userSearch = false) => {
   if(state.recipeArr.length === 4) {
     // prepare UI
     searchView.clearLoader();
-    
+    searchView.clearResults();
+
     // render results to UI
     searchView.renderRecipe(state.recipeArr);
   }
