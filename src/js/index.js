@@ -10,9 +10,8 @@ import Recipe from './modal/recipe';
 const state = {
   search: {},
   recipeArr: [],
-  currentIngredients:['beef', 'chicken', 'salad', 'pasta']
+  currentIngredients:['beef', "pasta"]
 };
-
 
 // replace current ingredients with User input value
 const updatecurrentIngredients = (item) => state.currentIngredients = item;
@@ -37,7 +36,7 @@ const controlSearch = async (item, userSearch = false) => {
   }
 
   // if state recipeArr has 4 item
-  if(state.recipeArr.length === 4) {
+  if(state.recipeArr.length === 4 || state.recipeArr.length === 2) {
     // prepare UI
     searchView.clearLoader();
     searchView.clearResults();
@@ -115,15 +114,17 @@ const controlRecipe = async () => {
   // get the id from the url
   const id = window.location.hash.replace('#', '');
 
-  if(id) {
-    // prepare UI from changes
-    recipeView.clearDetails();
+  console.log(state.recipe.id);
 
+  if(id) {
     // create new recipe object
     state.recipe = new Recipe(id);
 
     // get recipe data
     await state.recipe.getRecipe();
+
+    // prepare UI from changes
+    recipeView.clearDetails();
 
     // render recipe
     recipeView.renderDetails(state.recipe);
