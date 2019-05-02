@@ -2,10 +2,13 @@
 Recipe Generator App
 
 ## Targets
-  * Use MVC (Modal, View, Controller) to structure JavaScript
+  * Use MVC (Modal, View, Controller) architecture to structure JavaScript
   * Learn the Fetch Api, Promises and Async Await
 
-
+### Todo
+  * Add Styles
+  * Refactor
+ 
 ## For developers
 Install project dependencies:
 
