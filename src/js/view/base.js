@@ -3,5 +3,6 @@ export const DOMelements = {
   searchForm: document.querySelector('.search'),
   searchInput: document.querySelector('.searchInput'),
   refreshBtn: document.querySelector('.refresh'),
-  recipeDetails: document.querySelector('.recipeDetails')
+  modal: document.querySelector('.modal'),
+  return: document.querySelector('.modal-return') 
 }

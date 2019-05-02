@@ -11,7 +11,7 @@ const state = {
   search: {},
   recipeArr: [],
   currentIngredients:['beef', "pasta"]
-};
+}; 
 
 // replace current ingredients with User input value
 const updatecurrentIngredients = (item) => state.currentIngredients = item;
@@ -44,6 +44,15 @@ const controlSearch = async (item, userSearch = false) => {
     // render results to UI
     searchView.renderRecipe(state.recipeArr);
   }
+
+  // Attach event listener to each recipe item
+  const recipeElementArray = document.querySelectorAll('.recipe');
+
+  Array.from(recipeElementArray).map(element => {
+    element.addEventListener('click', () => {
+      DOMelements.modal.classList.toggle('active');
+    });
+  });
 }
 
 
@@ -114,8 +123,6 @@ const controlRecipe = async () => {
   // get the id from the url
   const id = window.location.hash.replace('#', '');
 
-  console.log(state.recipe.id);
-
   if(id) {
     // create new recipe object
     state.recipe = new Recipe(id);
@@ -128,7 +135,14 @@ const controlRecipe = async () => {
 
     // render recipe
     recipeView.renderDetails(state.recipe);
+
+    // Add event listener to return button
+document.querySelector('.modal-return').addEventListener('click', () => {
+  DOMelements.modal.classList.toggle('active')
+});
   }
 };
 
+
 window.addEventListener('hashchange', controlRecipe);
+
