@@ -89,55 +89,120 @@ form {
   }
 }
 
-.refresh,
-.list {
+.refresh {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
-  padding: 5%;
-  color: orangered;
+  padding: 7%;
+  color: ghostwhite;
   font-size: 1rem;
   flex: 1;
 }
 
+.search {
+  position: relative;
+  margin: 10px;
+  flex: 2;
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid ghostwhite;
+  border-radius: 30px;
+}
+
+.search-input {
+  width: 100%;
+  font-size: 1.25rem;
+  padding: 5px 5px 5px 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: ghostwhite;
+}
+
+.search-button {
+  position: absolute;
+  right: 15px;
+  background-color: transparent;
+  color: ghostwhite;
+  border-radius: 100%;
+  border: none;
+  font-size: 1rem;
+  padding: 5px;
+}
+
 .nav {
   position: absolute;
-  background-color: white;
+  background-color: #1B998B;
   width: 100%;
   bottom: 0;
   display: flex;
   border-radius: 20px 20px 0 0;
 }
 
-.search {
+.search-icon {
   position: absolute;
   bottom: 0;
   left: 42%;
   transform-origin: center center;
-  background-color: red;
+  background-color: ghostwhite;
   height: 100px;
   width: 50px;
-  color: white;
+  color: ghostwhite;
   border-radius: 30px 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: 1.25rem; 
 }
 
-.recipe-details {
-  height: 90vh;
-  width: 330px;
+.modal {
+  position: absolute;
+  right: -1px;
+  height: 100%;
+  width: 0%;
+  background: white;
+  transition: width .3s ease;
+}
+
+.modal-return {
+  position: absolute;
+  left: 5%;
+  top: 2%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  height: 30px;
+  width: 30px;
+  background: rgba(27, 153, 139, .7);
+  border-radius: 100%;
+  color: white;
+  z-index: 10;
 }
 
-.recipe-details__img {
-  display: block;
-  height: 200px;
-  width: 100%;
+/* change to recipe card */
+.active {
+  width: 101%;
+}
+
+.modal-image {
+  height: 40%;
+  background-image: linear-gradient(to right top, rgba(221, 96, 49, .5), rgba(234, 128, 43, .5), rgba(242, 160, 41, .5), rgba(246, 193, 48, .5)), url('http://static.food2fork.com/pestoa0e7.jpg');
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(0 0, 100% 0, 100% 86%, 0% 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 86%, 0% 100%);
+}
+
+.modal-title {
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(27, 153, 139);
+  margin-top: 0;
+}
+
+.modal-list {
+  list-style: none;
 }
