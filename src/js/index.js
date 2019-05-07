@@ -1,6 +1,6 @@
 import * as searchView from './view/searchView';
 import * as recipeView from './view/recipeView';
-import { DOMelements } from './view/base';
+import { DOMelements, attachRecipeEvent } from './view/base';
 import Search from './modal/search';
 import Recipe from './modal/recipe';
 
@@ -13,7 +13,7 @@ const state = {
   currentIngredients:['beef', "pasta"]
 }; 
 
-// replace current ingredients with User input value
+// replaces current ingredients with User input value
 const updatecurrentIngredients = (item) => state.currentIngredients = item;
 
 const controlSearch = async (item, userSearch = false) => {
@@ -35,7 +35,7 @@ const controlSearch = async (item, userSearch = false) => {
     state.recipeArr.push(...state.search[item].results.splice(0, 1));
   }
 
-  // if state recipeArr has 4 item
+  // if state has 4 recipes ready
   if(state.recipeArr.length === 4 || state.recipeArr.length === 2) {
     // prepare UI
     searchView.clearLoader();
@@ -45,14 +45,11 @@ const controlSearch = async (item, userSearch = false) => {
     searchView.renderRecipe(state.recipeArr);
   }
 
-  // Attach event listener to each recipe item
-  const recipeElementArray = document.querySelectorAll('.recipe');
+  // get current UI recipe
+  const currentRecipeList = document.querySelectorAll('.recipe');
+  // Add EventListener
+  attachRecipeEvent(currentRecipeList);
 
-  Array.from(recipeElementArray).map(element => {
-    element.addEventListener('click', () => {
-      DOMelements.modal.classList.toggle('active');
-    });
-  });
 }
 
 
@@ -73,7 +70,7 @@ DOMelements.searchForm.addEventListener('submit', e => {
   searchView.clearResults();
   searchView.renderLoader(DOMelements.results);
   
-  // Query api
+  // call API with user input
   controlSearch(query, true);
 });
 
@@ -112,6 +109,11 @@ DOMelements.refreshBtn.addEventListener('click', () => {
   // render new recipes
   searchView.clearLoader();
   searchView.renderRecipe(state.recipeArr);
+
+  // get current UI recipe
+  const currentRecipeList = document.querySelectorAll('.recipe');
+  // Add EventListener
+  attachRecipeEvent(currentRecipeList);
 });
 
 
@@ -137,9 +139,10 @@ const controlRecipe = async () => {
     recipeView.renderDetails(state.recipe);
 
     // Add event listener to return button
-document.querySelector('.modal-return').addEventListener('click', () => {
-  DOMelements.modal.classList.toggle('active')
-});
+    document.querySelector('.modal-return').addEventListener('click', () => {
+      DOMelements.modal.classList.toggle('active');
+      DOMelements.modal.classList.toggle('slide-in-out');
+    });
   }
 };
 

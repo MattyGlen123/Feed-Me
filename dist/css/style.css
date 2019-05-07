@@ -1,6 +1,7 @@
 body {
   font-family: 'Muli', sans-serif;
   background-color: grey;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,13 +11,23 @@ main {
   position: relative;
   max-width: 330px;
   width: 100vw;
-  height: 90vh;
-  background-image: linear-gradient(to right top, #dd6031, #ea802b, #f2a029, #f6c130, #f4e242);;
+  height: 555px;
   border-radius: 20px;
+  overflow: hidden;
+}
+
+.card {
+  height: 100%;
+  background-image: linear-gradient(to right top, #dd6031, #ea802b, #f2a029, #f6c130, #f4e242);
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  justify-content: space-between;
+  transition: all .3s ease;
+}
+
+.slide-in-out {
+  transform: translateX(-330px);
 }
 
 .title {
@@ -49,11 +60,11 @@ main {
   border: 1px solid lightsalmon;
 }
   
-  .recipe__img {
-    height: 15vh;
-    width: 100%;
-    object-fit: cover;
-  }
+.recipe__img {
+  height: 15vh;
+  width: 100%;
+  object-fit: cover;
+}
   
 .recipe__title {
   color: ghostwhite;
@@ -134,10 +145,8 @@ form {
 }
 
 .nav {
-  position: absolute;
   background-color: #1B998B;
   width: 100%;
-  bottom: 0;
   display: flex;
   border-radius: 20px 20px 0 0;
 }
@@ -160,17 +169,23 @@ form {
 
 .modal {
   position: absolute;
-  right: -1px;
+  right: -330px;
+  top: 0;
   height: 100%;
-  width: 0%;
+  width: 330px;
   background: white;
-  transition: width .3s ease;
+  transition: all .3s ease;
+}
+
+/* change to recipe card */
+.active {
+  transform: translateX(-330px);
 }
 
 .modal-return {
   position: absolute;
   left: 5%;
-  top: 2%;
+  top: 4%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,10 +197,6 @@ form {
   z-index: 10;
 }
 
-/* change to recipe card */
-.active {
-  width: 101%;
-}
 
 .modal-image {
   height: 40%;
