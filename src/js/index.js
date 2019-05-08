@@ -23,6 +23,9 @@ const controlSearch = async (item, userSearch = false) => {
   // store results in state
   await state.search[item].getResults();
 
+  // If api limit is reached
+  if(state.search[item].results == undefined) return DOMelements.results.textContent = "Sorry, we're all out of recipes today. Please try again tommorrow!"; 
+
   // if the user enters a value into the search input
   if(userSearch) {
     // Replace default ingredients with the user input 
