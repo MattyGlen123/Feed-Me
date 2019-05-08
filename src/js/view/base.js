@@ -12,7 +12,7 @@ export const attachRecipeEvent = (list) => {
   Array.from(list).map(element => {
     element.addEventListener('click', () => {
       DOMelements.modal.classList.toggle('active');
-      DOMelements.modal.classList.toggle('slide-in-out');
+      DOMelements.card.classList.toggle('slide-in-out');
     }); 
   });
 } 

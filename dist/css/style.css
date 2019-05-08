@@ -5,15 +5,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), radial-gradient(at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.50) 50%);
 }
 
 main {
   position: relative;
   max-width: 330px;
   width: 100vw;
-  height: 555px;
+  height: 90vh;
+  max-height: 700px;
   border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0px 7px 400px 2px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0px 7px 400px 2px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0px 7px 400px 2px rgba(0,0,0,0.6);
 }
 
 .card {
@@ -147,6 +152,7 @@ form {
 .nav {
   background-color: #1B998B;
   width: 100%;
+  margin-bottom: -2px;
   display: flex;
   border-radius: 20px 20px 0 0;
 }

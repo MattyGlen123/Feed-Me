@@ -10,7 +10,7 @@ import Recipe from './modal/recipe';
 const state = {
   search: {},
   recipeArr: [],
-  currentIngredients:['beef', "pasta"]
+  currentIngredients:['beef', "pasta", "noodles", "salad"]
 }; 
 
 // replaces current ingredients with User input value
@@ -36,7 +36,7 @@ const controlSearch = async (item, userSearch = false) => {
   }
 
   // if state has 4 recipes ready
-  if(state.recipeArr.length === 4 || state.recipeArr.length === 2) {
+  if(state.recipeArr.length === 4) {
     // prepare UI
     searchView.clearLoader();
     searchView.clearResults();
@@ -77,7 +77,7 @@ DOMelements.searchForm.addEventListener('submit', e => {
 // used to reset UI recipes
 const clearRecipeArr = () => state.recipeArr = [];
 
-
+// gets 4 new recipes from state and places this in current recipe array
 const userRecipeUpdate = () => {
   state.recipeArr = state.search[state.currentIngredients].results.splice(0, 4);
 };
@@ -141,7 +141,10 @@ const controlRecipe = async () => {
     // Add event listener to return button
     document.querySelector('.modal-return').addEventListener('click', () => {
       DOMelements.modal.classList.toggle('active');
-      DOMelements.modal.classList.toggle('slide-in-out');
+      DOMelements.card.classList.toggle('slide-in-out');
+
+      // prepare UI from changes
+      recipeView.clearDetails();
     });
   }
 };

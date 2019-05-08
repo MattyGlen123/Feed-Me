@@ -3,7 +3,10 @@ import { DOMelements } from "./base";
 const createItem = (ingredient) => `<li class="">${ingredient}</li>`;
 
 export const renderDetails = (recipe) => {
-  
+  console.log(recipe.ingredients);
+
+  if(recipe.ingredients.length > 10) recipe.ingredients.splice(10); 
+
   const markup = `
     <span class="modal-return"><i class="fas fa-arrow-left"></i></span>
     <div class="modal-image" style="background-image: url('${recipe.img}');"></div>
